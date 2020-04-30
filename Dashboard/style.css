@@ -27,7 +27,39 @@
 
 /* Dashboard */
 
-body{
+
+
+body {
   background: #2f3640;
+}
+
+.grid1{
+  margin: 0 auto;
+  max-width: 70em;
+  padding: 1em 0;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 20vw 30vw 10vw;
+  grid-gap: 1em;
+}
+
+
+footer {
+  grid-column: 1 / span 2;
+  background: #0097e6;
+}
+
+main{
+  background:#8c7ae6;
+}
+
+aside{
+  background: #e1b12c;
+}
+
+main, aside, footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
