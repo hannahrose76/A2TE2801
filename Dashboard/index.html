@@ -1,97 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
+<!DOCTYPE html><!--defines html-->
+<html lang="en"><!--sets to English-->
+	<head><!--start head-->
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<title>Australian Fire Databoard</title>
+		<title>Australian Fire Databoard</title><!--sets title-->
 
-		<link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
-		<link href="style.css" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" /><!--link to google fonts-->
+		<link href="style.css" rel="stylesheet" /><!--link style.css-->
+		<script src="scripts.js"></script> <!--link to JavaScript file-->
+		<script src="Chart.bundle.js"></script><!-- link to chart bundle file-->
+	</head><!--end head-->
 
-		<script src="Chart.bundle.js"></script>
-		<script>
-			var myChart = new Chart(ctx,{...});
-		</script>
-	</head>
-
-	<body>
+	<body><!--start body-->
+		<br>
 		<div id="root"></div>
 
-		<div class="grid1">
+		<div class="grid1"><!--start grid1-->
 			<main>
-				<canvas id="myChart" width="400" height="200"></canvas>
-				<script src="scripts.js"></script>
+				<canvas id="myChart" width="400" height="200"></canvas><!--Chart 1 Fire Type-->
 			</main>
 			<aside>
-
-			
-
+				<canvas id="statusChart" width="400" height="200"></canvas><!-- Chart 2 Fire Status-->
 			</aside>
+			
 			<footer>
 				Chart1
 			</footer>
-		</div>
-	</body>
-</html>
-="button" onclick="get_loclist()" value="run get_loclist">
-
-
-
-<div class="grid1">
-    <main>
-      <canvas id="myChart" width="400" height="200"></canvas>
-<script>
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: 'Test Chart',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132)',
-                'rgba(54, 162, 235)',
-                'rgba(255, 206, 86)',
-                'rgba(75, 192, 192)',
-                'rgba(153, 102, 255)',
-                'rgba(255, 159, 64)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132)',
-                'rgba(54, 162, 235)',
-                'rgba(255, 206, 86)',
-                'rgba(75, 192, 192)',
-                'rgba(153, 102, 255)',
-                'rgba(255, 159, 64)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
-</script>
-    </main>
-    <aside>
-
-    
-
-    </aside>
-    <footer>
-      Chart1
-    </footer>
-</div>
-
-
-
-  </body>
-</html>
+		</div><!--end grid1-->
+	</body><!--end body-->
+</html><!--end html-->
