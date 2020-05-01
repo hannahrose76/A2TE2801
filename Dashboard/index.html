@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Australian Fire Databoard</title>
+		<title>Australian Fire Databoard</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
-    <link href="style.css" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+		<link href="style.css" rel="stylesheet" />
 
-    <script src="Chart.bundle.js"></script>
-    <script>
-        var myChart = new Chart(ctx, {...});
-    </script>
+		<script src="Chart.bundle.js"></script>
+		<script>
+			var myChart = new Chart(ctx,{...});
+		</script>
+	</head>
 
-  </head>
+	<body>
+		<div id="root"></div>
 
-  <body>
-    <div id="root"></div>
-    <script src="scripts.js"></script>
-		<input type="button" onclick="get_latlong('Newell Hwy, Alleena, NSW 2671')" value="run get_latlong" alt="get latitude and logitude of Newell Hwy, Alleena, NSW 2671">
-		<input type="button" onclick="get_loclist()" value="run get_loclist">
+		<div class="grid1">
+			<main>
+				<canvas id="myChart" width="400" height="200"></canvas>
+				<script src="scripts.js"></script>
+			</main>
+			<aside>
+
+			
+
+			</aside>
+			<footer>
+				Chart1
+			</footer>
+		</div>
+	</body>
+</html>
+="button" onclick="get_loclist()" value="run get_loclist">
 
 
 
