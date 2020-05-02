@@ -71,7 +71,7 @@ function get_counts(){ //take input from an RSS feed via a json formatting API t
 				//console.log("grass fires: " + grassfirecount);
 				//console.log("hazard reduction fires: " + hazardreductionfirecount);
 				//console.log("-----------------------------------------------");
-				
+
 			})
 			isPaused = false; //set isPaused variable to false to allow the chart function to continue
 			//console.log("not paused " + isPaused);
@@ -197,10 +197,102 @@ function getUnderControlDoughnutGraph(){ //function used to create the chart and
 				options: {
 					cutoutPercentage: 40,
 					responsive: false
-				}	
+				}
 			});
 		}
 	}
 	waitForPause();
 }
 getUnderControlDoughnutGraph(); //initiate the chart function to begin webpage development
+
+
+
+
+var randomScalingFactor = function() {
+  return Math.round(Math.random() * 100);
+};
+
+var randomData = function () {
+  return [
+    randomScalingFactor(),
+    randomScalingFactor(),
+    randomScalingFactor(),
+  ];
+};
+
+var randomValue = function (data) {
+  return Math.max.apply(null, data) * Math.random();
+};
+
+var data = randomData();
+var value = randomValue(data);
+
+var config = {
+  type: 'gauge',
+  data: {
+    labels: ['Low Risk', 'Medium', 'High Risk'],
+    datasets: [{
+      data: data,
+      value: value,
+      backgroundColor: ['green', 'yellow', 'red'],
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    title: {
+      display: true,
+      text: 'Gauge chart with datalabels plugin displaying labels'
+    },
+    layout: {
+      padding: {
+        bottom: 30
+      }
+    },
+    needle: {
+      // Needle circle radius as the percentage of the chart area width
+      radiusPercentage: 2,
+      // Needle width as the percentage of the chart area width
+      widthPercentage: 3.2,
+      // Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc
+      lengthPercentage: 80,
+      // The color of the needle
+      color: 'rgba(0, 0, 0, 1)'
+    },
+    valueLabel: {
+      display: false
+    },
+    plugins: {
+      datalabels: {
+        display: true,
+        formatter:  function (value, context) {
+          return context.chart.data.labels[context.dataIndex];
+        },
+        //color: function (context) {
+        //  return context.dataset.backgroundColor;
+        //},
+        color: 'rgba(0, 0, 0, 1.0)',
+        //color: 'rgba(255, 255, 255, 1.0)',
+        backgroundColor: null,
+        font: {
+          size: 20,
+          weight: 'bold'
+        }
+      }
+    }
+  }
+};
+
+window.onload = function() {
+  var ctx = document.getElementById('chart').getContext('2d');
+  window.myGauge = new Chart(ctx, config);
+};
+
+document.getElementById('randomizeData').addEventListener('click', function() {
+  config.data.datasets.forEach(function(dataset) {
+    dataset.data = randomData();
+    dataset.value = randomValue(dataset.data);
+  });
+
+  window.myGauge.update();
+});

@@ -10,6 +10,10 @@
 		<link href="style.css" rel="stylesheet" /><!--link style.css-->
 		<script src="scripts.js"></script> <!--link to JavaScript file-->
 		<script src="Chart.bundle.js"></script><!-- link to chart bundle file-->
+
+		<script src="https://unpkg.com/chartjs-gauge@0.1.2/dist/chartjs-gauge.js"></script>
+		  <script src="https://unpkg.com/chartjs-plugin-datalabels@0.7.0/dist/chartjs-plugin-datalabels.js"></script>
+
 	</head><!--end head-->
 
 	<body><!--start body-->
@@ -23,9 +27,12 @@
 			<aside>
 				<canvas id="statusChart" width="400" height="200"></canvas><!-- Chart 2 Fire Status-->
 			</aside>
-			
+
 			<footer>
-				Chart1
+
+				<div id="canvas-holder" style="width:100%">
+ <canvas id="chart"></canvas>
+ </div>
 			</footer>
 		</div><!--end grid1-->
 	</body><!--end body-->
