@@ -206,17 +206,17 @@ function getUnderControlDoughnutGraph(){ //function used to create the chart and
 getUnderControlDoughnutGraph(); //initiate the chart function to begin webpage development
 
 
+//Gauge
 
-
-var randomScalingFactor = function() {
-  return Math.round(Math.random() * 100);
+var ScalingFactor = function(a) {
+  return Math.round(a);
 };
 
 var randomData = function () {
   return [
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor(),
+    ScalingFactor(1),
+    ScalingFactor(2),
+    ScalingFactor(3),
   ];
 };
 
@@ -230,11 +230,11 @@ var value = randomValue(data);
 var config = {
   type: 'gauge',
   data: {
-    labels: ['Low Risk', 'Medium', 'High Risk'],
+    labels: ['Low Risk', 'Medium Risk', 'High Risk'],
     datasets: [{
       data: data,
       value: value,
-      backgroundColor: ['green', 'yellow', 'red'],
+      backgroundColor: ['#4cd137', '#fbc531', '#e84118'],
       borderWidth: 2
     }]
   },
@@ -242,7 +242,7 @@ var config = {
     responsive: true,
     title: {
       display: true,
-      text: 'Gauge chart with datalabels plugin displaying labels'
+      text: 'Risk of Bush fire today based on humidity and current tempurature',
     },
     layout: {
       padding: {
@@ -255,9 +255,9 @@ var config = {
       // Needle width as the percentage of the chart area width
       widthPercentage: 3.2,
       // Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc
-      lengthPercentage: 80,
+      lengthPercentage: 60,
       // The color of the needle
-      color: 'rgba(0, 0, 0, 1)'
+      color: '#353b48'
     },
     valueLabel: {
       display: false
@@ -268,15 +268,12 @@ var config = {
         formatter:  function (value, context) {
           return context.chart.data.labels[context.dataIndex];
         },
-        //color: function (context) {
-        //  return context.dataset.backgroundColor;
-        //},
-        color: 'rgba(0, 0, 0, 1.0)',
-        //color: 'rgba(255, 255, 255, 1.0)',
+        color: '#f5f6fa',
         backgroundColor: null,
         font: {
           size: 20,
-          weight: 'bold'
+          weight: 'bold',
+
         }
       }
     }
