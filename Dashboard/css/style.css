@@ -64,3 +64,10 @@ main, aside, footer {
   justify-content: center;
 
 }
+#dataArt {
+	background-color: #0097e6;
+	height: 100%;
+	width: 100%;
+	margin-left: -5px;
+	border: 1px solid;
+}
