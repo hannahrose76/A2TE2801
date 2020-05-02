@@ -11,6 +11,7 @@ let bushfirecount = 0;
 let floodTreeStormfirecount = 0;
 let vehicleEquipmentfirecount = 0;
 let mvaTransportfirecount = 0;
+let medicalfirecount = 0;
 
 let undercontrol = 0; //declare variables for various fires to keep track for later use in chart 2
 let outofcontrol = 0;
@@ -41,7 +42,7 @@ function get_counts(){ //take input from an RSS feed via a json formatting API t
 				else if(info.search("Hazard Reduction")>0){
 					hazardreductionfirecount++;
 				}
-				else if(info.search("Burn Off")>0){
+				else if(info.search("Burn off")>0){
 					burnofffirecount++;
 				}
 				else if(info.search("Structure Fire")>0){
@@ -61,6 +62,9 @@ function get_counts(){ //take input from an RSS feed via a json formatting API t
 				}
 				else if(info.search("MVA/Transport")>0){
 					mvaTransportfirecount++;
+				}
+				else if(info.search("Medical")>0){
+					medicalfirecount++;
 				}
 				else if(info.search("Other")>0){ //this must be the last else if statement
 					otherfirecount++;
@@ -90,10 +94,10 @@ function chart(){ //function used to create the chart and input its data
 			var myChart = new Chart(ctx, { //formatting the chart object
 				type: 'bar', //set the type to a bar chart
 				data: {
-					labels: ["Grass Fire", 'Hazard Reduction', 'Burn Off', 'Structure Fire', 'Haystack Fire', 'Bush Fire', 'Flood/Storm/Tree Down', 'Vehicle/Equipment Fire', 'MVA/Transport', 'Other'], //set the labels along the bar charts x axis
+					labels: ["Grass Fire", 'Hazard Reduction', 'Burn Off', 'Structure Fire', 'Haystack Fire', 'Bush Fire', 'Flood/Storm/Tree Down', 'Vehicle/Equipment Fire', 'MVA/Transport', 'Medical', 'Other'], //set the labels along the bar charts x axis
 					datasets: [{
 						label: 'Amount of fires by type in New South Wales, Australia', //set the chart title
-						data: [grassfirecount, hazardreductionfirecount, burnofffirecount, structurefirecount, haystackfirecount, bushfirecount, floodTreeStormfirecount, vehicleEquipmentfirecount, mvaTransportfirecount, otherfirecount], //add the data
+						data: [grassfirecount, hazardreductionfirecount, burnofffirecount, structurefirecount, haystackfirecount, bushfirecount, floodTreeStormfirecount, vehicleEquipmentfirecount, mvaTransportfirecount, medicalfirecount, otherfirecount], //add the data
 						backgroundColor: [
 							'rgba(255, 99, 132)', //set colours of the bars
 							'rgba(54, 162, 235)',
@@ -104,7 +108,8 @@ function chart(){ //function used to create the chart and input its data
 							'rgba(255, 206, 86)',
 							'rgba(75, 192, 192)',
 							'rgba(54, 162, 235)',
-							'rgba(255, 159, 64)'
+							'rgba(255, 159, 64)',
+							'rgba(255, 206, 86)',
 						]
 					}]
 				},
@@ -154,7 +159,7 @@ function getUnderControl(){
 			var data = JSON.parse(text); //parse the text variable to a json object for filtering out data
 			data.items.forEach(locations => {
 				let controlled = getUnderControlSplitData(locations.description);
-				console.log(controlled);
+				//console.log(controlled);
 				if(controlled=="STATUS: Under control "){
 					undercontrol++;
 				}
@@ -164,8 +169,8 @@ function getUnderControl(){
 				else{
 					console.log("no fire status");
 				}
-				console.log(undercontrol);
-				console.log(outofcontrol);
+				//console.log(undercontrol);
+				//console.log(outofcontrol);
 			});
 			isPauseddoughnut = false; //set isPaused variable to false to allow the chart function to continue
 			//console.log("not paused " + isPaused);
@@ -189,8 +194,8 @@ function getUnderControlDoughnutGraph(){ //function used to create the chart and
 						data: [undercontrol, outofcontrol], //add the data
 						backgroundColor: [
 							 //set colours of the chart
-							'rgba(255, 206, 86, 0.2)',
-        					'rgba(75, 192, 192, 0.2)'
+							'rgba(219, 109, 0, 0.9)',
+        					'rgba(219, 0, 0, 0.9)'
 						]
 					}]
 				},
@@ -205,7 +210,7 @@ function getUnderControlDoughnutGraph(){ //function used to create the chart and
 }
 getUnderControlDoughnutGraph(); //initiate the chart function to begin webpage development
 
-
+//---------------------------------------------------------Guage-------------------------------------
 //Gauge by Charlotte
 //Setting the scaling for each section
 var ScalingFactor = function(a) {
@@ -286,11 +291,71 @@ window.onload = function() {
   window.myGauge = new Chart(ctx, config);
 };//This is loaded when the HTML is so it doesn't go before it. This also links the HTML element to the javscript
 
-document.getElementById('randomizeData').addEventListener('click', function() {
+/*document.getElementById('randomizeData').addEventListener('click', function() {
   config.data.datasets.forEach(function(dataset) {
     dataset.data = randomData();
     dataset.value = randomValue(dataset.data); //Sets up the random data for when the page loads
   });
 
   window.myGauge.update();
-});
+});*/
+//---------------------------------------------------------DataArt-------------------------------------
+let isPausedDataArt = false;
+function getDataArtDataSplit(data){
+	data = data.split("<br />"); //uncomment line if using the morning-earth url on line 22, comment line below
+	//data = data.split("<br>"); //uncomment line if using the rss2json url on line 23, comment line above
+	info = data[6];
+	info = info.split(" ");
+	info = info[1];
+	info = parseFloat(info);
+	info++;
+	return info
+}
+
+function getDataArtData(){
+	url = 'https://morning-earth-19323.herokuapp.com/?feedURL=http://www.rfs.nsw.gov.au/feeds/majorIncidents.xml' //url of API including the RSS feed to be parsed (feedURL=<RSS feed URL>)
+	//url = 'https://api.rss2json.com/v1/api.json?rss_url=http://www.rfs.nsw.gov.au/feeds/majorIncidents.xml' //alternate API url, provides less data but is more tested (uncomment this line and comment the above line to use this API)
+	isPausedDataArt = true; //variable used to prevent the chart from loading before the data has been parsed and filtered
+	//console.log("paused " + isPaused);
+	fetch(url).then(function(response) { //used to pull the information from the RSS feed using the fetch protocol and passing the data to the variable "text"
+		response.text().then(function(text) {
+			var data = JSON.parse(text); //parse the text variable to a json object for filtering out data
+			data.items.forEach(locations => {
+				let size = getDataArtDataSplit(locations.description);
+				dataArtCircle(size);
+				console.log("Size: " + size);
+			});
+			isPausedDataArt = false; //set isPaused variable to false to allow the chart function to continue
+			//console.log("not paused " + isPaused);
+		});
+	});
+}
+
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+function dataArtCircle(Scale){
+	var ctx = document.getElementById('dataArt')
+	//var ctxpaint = ctx.getContext('2d');
+	let xmax = ctx.width;
+	let ymax = ctx.height;
+	let randx = getRndInteger(0,xmax);
+	let randy = getRndInteger(0,ymax);
+	Scale = (Scale/ymax)*10;
+	let r = getRndInteger(0,100);
+	let g = getRndInteger(100,200);
+	let b = getRndInteger(200,255);
+	console.log(r + " " + g + " " + b);
+	function circle(x,y,r,cr,cg,cb){
+		let c = ctx.getContext('2d');
+		c.beginPath();
+		c.arc(x, y, r, 0, 2 * Math.PI);
+		c.fillStyle = "rgb(00,00,255)";
+		c.fill();
+		c.stroke();
+	}
+	circle(randx,randy,Scale,r,g,b);
+	//console.log(Scale);
+}
+getDataArtData();
