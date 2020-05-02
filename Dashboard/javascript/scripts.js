@@ -336,26 +336,26 @@ function getRndInteger(min, max) {
 }
 
 function dataArtCircle(Scale){
-	var ctx = document.getElementById('dataArt')
+	var ctx = document.getElementById('dataArt');
 	//var ctxpaint = ctx.getContext('2d');
 	let xmax = ctx.width;
 	let ymax = ctx.height;
 	let randx = getRndInteger(0,xmax);
 	let randy = getRndInteger(0,ymax);
 	Scale = (Scale/ymax)*10;
-	let r = getRndInteger(0,100);
-	let g = getRndInteger(100,200);
-	let b = getRndInteger(200,255);
-	console.log(r + " " + g + " " + b);
-	function circle(x,y,r,cr,cg,cb){
+	//let r = getRndInteger(0,100); 	//tried to have different coloured circles
+	//let g = getRndInteger(100,200);
+	//let b = getRndInteger(200,255);
+	//console.log(r + " " + g + " " + b);
+	function circle(x,y,r){
 		let c = ctx.getContext('2d');
 		c.beginPath();
 		c.arc(x, y, r, 0, 2 * Math.PI);
-		c.fillStyle = "rgb(00,00,255)";
+		c.fillStyle = "rgba(219, 109, 0, 0.9)"; //set circle fill color to orange
 		c.fill();
 		c.stroke();
 	}
-	circle(randx,randy,Scale,r,g,b);
+	circle(randx,randy,Scale);
 	//console.log(Scale);
 }
 getDataArtData();
