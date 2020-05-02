@@ -65,9 +65,13 @@ main, aside, footer {
 
 }
 #dataArt {
-	background-color: #0097e6;
+	background-color: #2f3640;
+	border: solid black 3px;
 	height: 100%;
 	width: 100%;
 	margin-left: -5px;
-	border: 1px solid;
+}
+
+label{
+	font-family: sans-serif;
 }
