@@ -299,6 +299,20 @@ window.onload = function() {
 
   window.myGauge.update();
 });*/
+
+//$(document).ready(function () {
+//Get JSON data from url
+//$.getJSON("http://gumball.wickedlysmart.com/"), function (data) {
+	//var sales = [];
+
+	//console.log(data);
+//};
+
+//});
+
+
+
+
 //---------------------------------------------------------DataArt-------------------------------------
 let isPausedDataArt = false;
 function getDataArtDataSplit(data){
