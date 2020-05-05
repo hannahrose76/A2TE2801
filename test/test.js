@@ -77,3 +77,9 @@ window.onload = function() {
   var ctx = document.getElementById('chart').getContext('2d');
   window.myGauge = new Chart(ctx, config);
 };
+
+$.get('http://numbersapi.com/random/math?json', function(data) {
+    var number = [];
+
+    console.log(data.number);
+});
