@@ -300,15 +300,21 @@ window.onload = function() {
   window.myGauge.update();
 });*/
 
-//$(document).ready(function () {
-//Get JSON data from url
-//$.getJSON("http://gumball.wickedlysmart.com/"), function (data) {
-	//var sales = [];
+//This here was me grabbing the random number api, i just couldn't figure out how to put it on the guage in test.html in the test folder.
+//So I ended up just using Math.random instead for the data
+$.get('http://numbersapi.com/random/math?json', function(data) {
+    var number = [];
 
-	//console.log(data);
-//};
+    console.log(data.number);
+//  prints the nubmer into the console. This is as far as I coudl get
 
-//});
+    //$.each(data.number, function(id, obj){
+    //  random.push(number);
+    //});
+
+    //console.log(number);
+//Old code of me trying to figure out how to put it in the needle, i knew it had something to do with dataset but it kept saying ' number not defined'
+    })
 
 
 

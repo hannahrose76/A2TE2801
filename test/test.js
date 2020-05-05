@@ -1,3 +1,16 @@
+$.get('http://numbersapi.com/random/math?json', function(data) {
+    var number = [];
+
+    console.log(data.number);
+
+
+    //$.each(data.number, function(id, obj){
+    //  random.push(number);
+    //});
+
+    //console.log(number);
+
+    })
 
 
 var ScalingFactor = function(a) {
@@ -18,6 +31,7 @@ var randomValue = function (data) {
 
 var data = randomData();
 var value = randomValue(data);
+//var value = number(data);
 //Setting up the data. This is where an API can be added.
 var config = {
   type: 'gauge',
@@ -77,9 +91,3 @@ window.onload = function() {
   var ctx = document.getElementById('chart').getContext('2d');
   window.myGauge = new Chart(ctx, config);
 };
-
-$.get('http://numbersapi.com/random/math?json', function(data) {
-    var number = [];
-
-    console.log(data.number);
-});
